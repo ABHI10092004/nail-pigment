@@ -1,0 +1,77 @@
+/* =========================================================
+   NAIL PIGMENT — HEADER / FOOTER ALIGNMENT (single source of truth)
+   File: css/header-footer-align.css
+   MUST be the LAST stylesheet linked on every page.
+
+   The header logo and footer logo share one left edge because
+   .header-inner, .footer-top and .footer-bottom all use the
+   same max-width and the same side padding (--np-gutter).
+   Works for LTR and RTL (logical padding / margin).
+   ========================================================= */
+
+:root {
+  --np-gutter: clamp(16px, 4vw, 48px);   /* side padding: phone → desktop */
+  --np-max: 1600px;                      /* content width cap, centred   */
+}
+
+/* Large desktops (1600px+, e.g. 1920 x 1080): use the full width so the
+   logo sits further left and the Book Appointment button further right.
+   The footer uses the same two variables, so it follows automatically.
+   Change --np-gutter here to move both edges in or out.               */
+@media (min-width: 1600px) {
+  :root {
+    --np-gutter: 64px;   /* distance from screen edge to logo / button */
+    --np-max: 2200px;    /* only matters on ultra-wide screens         */
+  }
+}
+
+/* ---------- HEADER ---------- */
+html:root body #site-header .site-header .header-inner {
+  width: 100% !important;
+  max-width: var(--np-max) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--np-gutter) !important;
+  box-sizing: border-box !important;
+}
+
+/* cancel every old "nudge the logo" hack */
+html:root body #site-header .site-header .brand {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  inset-inline: auto !important;
+  transform: none !important;
+  margin-inline: 0 !important;
+  justify-self: start !important;
+}
+
+/* ---------- FOOTER ---------- */
+html:root body #site-footer .site-footer {
+  width: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding-inline: 0 !important;
+  box-sizing: border-box !important;
+}
+
+html:root body #site-footer .site-footer .footer-top,
+html:root body #site-footer .site-footer .footer-bottom {
+  width: 100% !important;
+  max-width: var(--np-max) !important;
+  margin-inline: auto !important;
+  padding-inline: var(--np-gutter) !important;
+  box-sizing: border-box !important;
+}
+
+/* cancel the old "move footer logo left/right" hacks */
+html:root body #site-footer .site-footer .footer-brand,
+html:root body #site-footer .site-footer .footer-brand .footer-logo {
+  position: static !important;
+  left: auto !important;
+  right: auto !important;
+  inset-inline: auto !important;
+  transform: none !important;
+  margin-inline: 0 !important;
+  padding-inline: 0 !important;
+  justify-self: start !important;
+}
